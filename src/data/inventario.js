@@ -1,37 +1,9 @@
-const inventario = [
-  {
-    sku: 2801,
-    linea: "Pinturas",
-    contenido: "24 ml",
-    nombre: "Calth Blue Clear",
-    marca: "Citadel",
-    uso: "Aerografo",
-    precio: 6000,
-    destacado: 1,
-    img: "https://res.cloudinary.com/dzhtmtpav/image/upload/v1669819441/Blueclear_jwdhmt.jpg",
-  },
-  {
-    sku: 2802,
-    contenido: "24 ml",
-    linea: "Pinturas",
-    nombre: "Contrast Ironjawz Yellow",
-    marca: "Citadel",
-    uso: "Aerografo",
-    precio: 6000,
-    destacado: 0,
-    img: "https://res.cloudinary.com/dzhtmtpav/image/upload/v1669819441/ironjawzyellow_qeye0s.jpg",
-  },
-  {
-    sku: 2803,
-    contenido: "18 ml",
-    linea: "Pinturas",
-    nombre: "Contrast Militarum Green",
-    marca: "Citadel",
-    uso: "Pincel",
-    precio: 6000,
-    destacado: 0,
-    img: "https://res.cloudinary.com/dzhtmtpav/image/upload/v1669819441/greenmilitarum_eaubxx.jpg",
-  },
+/*
+ * Creado por: Anibal
+ * Fecha creación: 29-11-2022
+ */
+
+const modelos = [
   {
     sku: 1001,
     linea: "Warhammer 40K",
@@ -57,6 +29,48 @@ const inventario = [
     precio: 45000,
     img: "https://res.cloudinary.com/dzhtmtpav/image/upload/v1669818497/125912858_kjzv38.jpg",
   },
+];
+
+const pinturas = [
+  {
+    id: 00001,
+    sku: 2801,
+    linea: "Pinturas",
+    contenido: "24 ml",
+    nombre: "Calth Blue Clear",
+    marca: "Citadel",
+    uso: "Aerografo",
+    precio: 6000,
+    destacado: 1,
+    img: "https://res.cloudinary.com/dzhtmtpav/image/upload/v1669819441/Blueclear_jwdhmt.jpg",
+  },
+  {
+    id: 00002,
+    sku: 2802,
+    contenido: "24 ml",
+    linea: "Pinturas",
+    nombre: "Contrast Ironjawz Yellow",
+    marca: "Citadel",
+    uso: "Aerografo",
+    precio: 6000,
+    destacado: 0,
+    img: "https://res.cloudinary.com/dzhtmtpav/image/upload/v1669819441/ironjawzyellow_qeye0s.jpg",
+  },
+  {
+    id: 00003,
+    sku: 2803,
+    contenido: "18 ml",
+    linea: "Pinturas",
+    nombre: "Contrast Militarum Green",
+    marca: "Citadel",
+    uso: "Pincel",
+    precio: 6000,
+    destacado: 0,
+    img: "https://res.cloudinary.com/dzhtmtpav/image/upload/v1669819441/greenmilitarum_eaubxx.jpg",
+  },
+];
+
+const mesa = [
   {
     sku: 2001,
     linea: "Tabletop",
@@ -83,4 +97,4 @@ const inventario = [
   },
 ];
 
-module.exports = inventario;
+module.exports = { modelos, pinturas, mesa };
