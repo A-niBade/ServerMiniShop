@@ -4,6 +4,7 @@
  */
 
 const { pinturas } = require("../data/inventario");
+const { validarSKU } = require("../helpers/pintura/pinturaSKU");
 
 /*
  * POSTEO DE UNA PINTURA JUNTO A SUS VALIDADORES POR SKU
@@ -14,19 +15,10 @@ const postPintura = async (req, res) => {
     id: Date.now() + pinturas.length + 1,
   };
 
-  const validarSKU = pinturas.find(
-    (pintura) => pintura.sku === nuevaPintura.sku
-  );
+  const validarSKUPintura = validarSKU(nuevaPintura);
 
-  const validarLinea = "Pinturas";
-
-  if (
-    (!validarSKU &&
-      validarLinea === nuevaPintura.linea &&
-      nuevaPintura.destacado === 0) ||
-    nuevaPintura.destacado === 1
-  ) {
-    pinturas.unshift(nuevaPintura);
+  if (!validarSKUPintura) {
+    pinturas.push(nuevaPintura);
     res.send();
   } else {
     res
