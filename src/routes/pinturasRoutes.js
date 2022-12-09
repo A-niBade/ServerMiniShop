@@ -5,18 +5,25 @@
 
 const express = require("express");
 const app = express.Router();
-const inventario = require("../data/inventario");
+const { pinturas } = require("../data/inventario");
 const { check } = require("express-validator");
 const { postPintura } = require("../controllers/pinturasController");
 const { validaCampos } = require("../middleware/validaCampos");
 
 // * Peticiones hacia las pinturas
 app.get("/inventario/pinturas", (req, res) => {
-  res.json(inventario.pinturas);
+  res.json(pinturas);
 });
 
 app.get("/inventario/pinturas/:id", (req, res) => {
-  res.json("Hola");
+  const id = Number(req.params.id);
+  const pintura = pinturas.find((pintura) => pintura.id === id);
+
+  if (pintura) {
+    res.json(pintura);
+  } else {
+    res.status(404).end();
+  }
 });
 
 app.post(
@@ -29,7 +36,7 @@ app.post(
     check("marca", "MARCA NO VÁLIDA").not().isEmpty(),
     check("uso", "USO NO VÁlIDO").not().isEmpty(),
     check("precio", "PRECIO NO VÁlIDO").isNumeric(),
-    check("destacado", "DESTACADO NO VÁlIDO").isNumeric(),
+    check("destacado", "DESTACADO NO VÁlIDO").isBoolean(),
     check("img", "IMAGEN NO VÁLIDA").not().isEmpty(),
     validaCampos,
   ],
