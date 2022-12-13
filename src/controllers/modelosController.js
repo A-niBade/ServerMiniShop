@@ -5,6 +5,31 @@
 
 const { validarSKU } = require("../helpers/modelo/modeloSKU");
 const modeloModel = require("../models/modeloModel");
+const modelo = require("../models/modeloModel");
+
+/*
+ * OBTENER TODOS LOS MODELOS
+ */
+const getModelos = async (req, res) => {
+  const modelos = await modelo.find({}).sort({ createdAt: -1 });
+
+  res.status(200).json(modelos);
+};
+
+/*
+ * OBTENER PINTURA POR SU ID
+ */
+const getModelo = async (req, res) => {
+  const { id } = req.params;
+
+  const modelos = await modelo.findById(id);
+
+  if (!modelos) {
+    return res.status(404).json({ error: "No existe pintura" });
+  }
+
+  res.status(200).json(modelos);
+};
 
 /*
  * POSTEO DE UN MODELO JUNTO A LOS VALIDADORES
@@ -31,4 +56,4 @@ const postModelo = async (req, res) => {
   }
 };
 
-module.exports = { postModelo };
+module.exports = { postModelo, getModelo, getModelos };
