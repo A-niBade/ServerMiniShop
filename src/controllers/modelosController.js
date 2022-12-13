@@ -3,7 +3,6 @@
  * Fecha creación: 05-12-2022
  */
 
-const { modelos } = require("../data/inventario");
 const { validarSKU } = require("../helpers/modelo/modeloSKU");
 const modeloModel = require("../models/modeloModel");
 
@@ -13,16 +12,14 @@ const modeloModel = require("../models/modeloModel");
 const postModelo = async (req, res) => {
   const nuevoModelo = {
     ...req.body,
-    id: Date.now() + modelos.length + 1,
   };
 
   const validarSKUModelo = validarSKU(nuevoModelo);
 
   if (!validarSKUModelo) {
-    await modeloModel.create(nuevoModelo, (err, docs) => {
-      res.send({ nuevoModelo: docs });
-    });
-    res.send();
+    const modelo = new modeloModel(nuevoModelo);
+    await modelo.save();
+    res.status(201).json({ nuevoModel: modelo });
   } else {
     res
       .status(404)

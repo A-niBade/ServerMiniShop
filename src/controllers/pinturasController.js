@@ -3,7 +3,6 @@
  * Fecha creación: 29-11-2022
  */
 
-const { pinturas } = require("../data/inventario");
 const { validarSKU } = require("../helpers/pintura/pinturaSKU");
 const pinturaModel = require("../models/pinturaModel");
 
@@ -13,15 +12,14 @@ const pinturaModel = require("../models/pinturaModel");
 const postPintura = async (req, res) => {
   const nuevaPintura = {
     ...req.body,
-    id: Date.now() + pinturas.length + 1,
   };
 
   const validarSKUPintura = validarSKU(nuevaPintura);
 
   if (!validarSKUPintura) {
-    await pinturaModel.create(nuevaPintura, (err, docs) => {
-      res.send({ nuevaPintura: docs });
-    });
+    const pintura = new pinturaModel(nuevaPintura);
+    await pintura.save();
+    res.status(201).json({ nuevoModel: pintura });
   } else {
     res
       .status(404)

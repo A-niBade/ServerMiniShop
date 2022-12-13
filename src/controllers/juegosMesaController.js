@@ -3,9 +3,8 @@
  * Fecha creación: 05-12-2022
  */
 
-const { mesa } = require("../data/inventario");
 const { validarSKU } = require("../helpers/juegos-de-mesa/juegoMesaSKU");
-const modeloModel = require("../models/modeloModel");
+const juegosMesaModel = require("../models/juegosMesaModel");
 
 /*
  * POSTEO DE UN JUEGO DE MESA
@@ -13,15 +12,14 @@ const modeloModel = require("../models/modeloModel");
 const postJuegoMesa = async (req, res) => {
   const nuevoJuego = {
     ...req.body,
-    id: Date.now() + mesa.length + 1,
   };
 
   const validarSKUMesa = validarSKU(nuevoJuego);
 
   if (!validarSKUMesa) {
-    await modeloModel.create(nuevoJuego, (err, docs) => {
-      res.send({ nuevoModel: docs });
-    });
+    const juegoMesa = new juegosMesaModel(nuevoJuego);
+    await juegoMesa.save();
+    res.status(201).json({ nuevoModel: juegoMesa });
   } else {
     res
       .status(404)
