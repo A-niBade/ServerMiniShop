@@ -7,24 +7,18 @@ const express = require("express");
 const app = express.Router();
 const { mesa } = require("../data/inventario");
 const { check } = require("express-validator");
-const { postJuegoMesa } = require("../controllers/juegosMesaController");
+const {
+  postJuegoMesa,
+  getJuegos,
+  getJuego,
+} = require("../controllers/juegosMesaController");
 const { validaCampos } = require("../middleware/validaCampos");
 
-// * Obtención de todos los juegos de mesa dentro del inventario
-app.get("/inventario/juegos-de-mesa", (req, res) => {
-  res.json(mesa);
-});
+// * OBTENCION DE TODOS LOS JUEGOS DE MESA
+app.get("/inventario/juegos-de-mesa", getJuegos);
 
-app.get("/inventario/juegos-de-mesa/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const mesas = mesa.find((mesas) => mesas.id === id);
-
-  if (mesas) {
-    res.json(mesas);
-  } else {
-    res.status(404).end();
-  }
-});
+// * OBTENCION DE UN JUEGO DE MESA POR ID
+app.get("/inventario/juegos-de-mesa/:id", getJuego);
 
 app.post("/inventario/juegos-de-mesa", [
   [

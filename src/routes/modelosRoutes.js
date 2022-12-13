@@ -5,26 +5,18 @@
 
 const express = require("express");
 const app = express.Router();
-const { modelos } = require("../data/inventario");
 const { check } = require("express-validator");
-const { postModelo } = require("../controllers/modelosController");
+const {
+  postModelo,
+  getModelos,
+  getModelo,
+} = require("../controllers/modelosController");
 const { validaCampos } = require("../middleware/validaCampos");
 
 //* Peticiones hacia los modelos
-app.get("/inventario/modelos", (req, res) => {
-  res.json(modelos);
-});
+app.get("/inventario/modelos", getModelos);
 
-app.get("/inventario/modelos/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const modelo = modelos.find((modelo) => modelo.id === id);
-
-  if (modelo) {
-    res.json(modelo);
-  } else {
-    res.status(404).end();
-  }
-});
+app.get("/inventario/modelos/:id", getModelo);
 
 app.post(
   "/inventario/modelos",
