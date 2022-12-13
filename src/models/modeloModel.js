@@ -7,11 +7,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const modeloSchema = new Schema({
-  id: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
   sku: {
     type: String,
     required: true,
