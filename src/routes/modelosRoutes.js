@@ -34,7 +34,7 @@ app.post(
     check("nombre", "NOMBRE NO VÁlIDO").not().isEmpty(),
     check("faccion", "MARCA NO VÁLIDA").not().isEmpty(),
     check("precio", "PRECIO NO VÁlIDO").isNumeric(),
-    check("destacado", "DESTACADO NO VÁlIDO").isNumeric(),
+    check("destacado", "DESTACADO NO VÁlIDO").isBoolean(),
     check("img", "IMAGEN NO VÁLIDA").not().isEmpty(),
     validaCampos,
   ],
