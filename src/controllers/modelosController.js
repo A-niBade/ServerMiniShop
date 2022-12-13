@@ -5,6 +5,7 @@
 
 const { modelos } = require("../data/inventario");
 const { validarSKU } = require("../helpers/modelo/modeloSKU");
+const modeloModel = require("../models/modeloModel");
 
 /*
  * POSTEO DE UN MODELO JUNTO A LOS VALIDADORES
@@ -18,7 +19,9 @@ const postModelo = async (req, res) => {
   const validarSKUModelo = validarSKU(nuevoModelo);
 
   if (!validarSKUModelo) {
-    modelos.unshift(nuevoModelo);
+    await modeloModel.create(nuevoModelo, (err, docs) => {
+      res.send({ nuevoModelo: docs });
+    });
     res.send();
   } else {
     res

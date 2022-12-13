@@ -5,9 +5,10 @@
 
 const { pinturas } = require("../data/inventario");
 const { validarSKU } = require("../helpers/pintura/pinturaSKU");
+const pinturaModel = require("../models/pinturaModel");
 
 /*
- * POSTEO DE UNA PINTURA JUNTO A SUS VALIDADORES POR SKU
+ * POSTEO DE UNA PINTURA
  */
 const postPintura = async (req, res) => {
   const nuevaPintura = {
@@ -18,8 +19,9 @@ const postPintura = async (req, res) => {
   const validarSKUPintura = validarSKU(nuevaPintura);
 
   if (!validarSKUPintura) {
-    pinturas.push(nuevaPintura);
-    res.send();
+    await pinturaModel.create(nuevaPintura, (err, docs) => {
+      res.send({ nuevaPintura: docs });
+    });
   } else {
     res
       .status(404)

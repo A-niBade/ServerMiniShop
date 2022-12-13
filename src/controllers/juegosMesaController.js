@@ -5,6 +5,7 @@
 
 const { mesa } = require("../data/inventario");
 const { validarSKU } = require("../helpers/juegos-de-mesa/juegoMesaSKU");
+const modeloModel = require("../models/modeloModel");
 
 /*
  * POSTEO DE UN JUEGO DE MESA
@@ -18,8 +19,9 @@ const postJuegoMesa = async (req, res) => {
   const validarSKUMesa = validarSKU(nuevoJuego);
 
   if (!validarSKUMesa) {
-    pinturas.unshift(nuevaPintura);
-    res.send();
+    await modeloModel.create(nuevoJuego, (err, docs) => {
+      res.send({ nuevoModel: docs });
+    });
   } else {
     res
       .status(404)
