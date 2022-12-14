@@ -2,10 +2,10 @@
  * Creado por: Anibal
  * Fecha creación: 29-11-2022
  */
-const PinturasRoutes = require("./src/routes/pinturasRoutes");
-const inventarioRoutes = require("./src/routes/inventarioRoutes");
-const modelosRoutes = require("./src/routes/modelosRoutes");
-const juegosMesaRoutes = require("./src/routes/juegosMesaRoutes");
+const paintRoutes = require("./src/routes/paintRoutes");
+const inventoryRoutes = require("./src/routes/inventoryRoutes");
+const setRoutes = require("./src/routes/setRoutes");
+const tableTopRoutes = require("./src/routes/tableTopRoutes");
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -19,14 +19,11 @@ app.listen(PORT);
 app.use(express.json());
 app.use(morgan("dev"));
 
-app.use(PinturasRoutes);
-app.use(inventarioRoutes);
-app.use(modelosRoutes);
-app.use(juegosMesaRoutes);
+app.use(paintRoutes);
+app.use(setRoutes);
+app.use(tableTopRoutes);
 
-/*
- * Enlace a mongo
- */
+// * Enlace a mongo
 mongoose.set("strictQuery", true);
 mongoose
   .connect(process.env.MONGODB_URI)
