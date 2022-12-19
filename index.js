@@ -3,7 +3,6 @@
  * Fecha creación: 29-11-2022
  */
 const paintRoutes = require("./src/routes/paintRoutes");
-const inventoryRoutes = require("./src/routes/inventoryRoutes");
 const setRoutes = require("./src/routes/setRoutes");
 const tableTopRoutes = require("./src/routes/tableTopRoutes");
 
@@ -11,7 +10,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const app = express();
+const cors = require("cors");
 require("dotenv").config();
+
+app.use(cors());
 
 const PORT = 3000;
 app.listen(PORT);
