@@ -25,6 +25,10 @@ app.use(paintRoutes);
 app.use(setRoutes);
 app.use(tableTopRoutes);
 
+app.get("/", (req, resp) => {
+  resp.send("WENA LOS PIBES");
+});
+
 // * Enlace a mongo
 mongoose.set("strictQuery", true);
 mongoose
