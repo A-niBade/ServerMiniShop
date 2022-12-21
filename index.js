@@ -32,7 +32,7 @@ app.get("/", (req, resp) => {
 // * Enlace a mongo
 mongoose.set("strictQuery", true);
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(process.env.MONGODB_URI || 3000)
   .then(() => console.log("Servidor enlazado a mongo"))
   .catch((error) => console.log(error));
 
